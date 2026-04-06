@@ -1,0 +1,73 @@
+/* Zoho Invoice Style Sidebar */
+.sidebar {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Logo section with subtle styling */
+.sidebar > div:first-child {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* Navigation items with refined hover effects */
+.nav-item {
+    position: relative;
+    border-radius: 8px;
+    margin: 2px 0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item:hover {
+    background-color: #f8fafc;
+    transform: translateX(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.nav-item:hover i {
+    transform: scale(1.05);
+}
+
+/* Active state for current page */
+.nav-item.active {
+    background-color: #eff6ff;
+    color: #2563eb;
+    font-weight: 500;
+}
+
+.nav-item.active i {
+    color: #2563eb;
+}
+
+/* Icon animations */
+.nav-item i {
+    transition: all 0.2s ease;
+    opacity: 0.8;
+}
+
+.nav-item:hover i {
+    opacity: 1;
+}
+
+/* User section styling */
+.user-avatar {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+/* Subtle divider */
+.border-t {
+    border-color: #e5e7eb;
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, div[style*="cursor-pointer"] {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus states for accessibility */
+.nav-item:focus,
+button:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
