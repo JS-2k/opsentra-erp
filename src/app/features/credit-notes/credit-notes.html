@@ -1,35 +1,35 @@
-<!-- Sidebar -->
-<app-sidebar></app-sidebar>
+﻿<app-sidebar></app-sidebar>
 
-<!-- Main Content Area -->
-<div class="ml-64 min-h-screen bg-gray-50">
-    <!-- Top Header -->
-    <header class="bg-white border-b border-gray-200 px-8 py-4 shadow-sm">
-        <div class="flex items-center justify-between">
-            <div>
-                <h1 class="text-2xl font-semibold text-gray-900">Credit Notes</h1>
-                <p class="text-sm text-gray-600 mt-1">Manage credit notes and adjustments.</p>
+<div class="module-shell ml-56">
+    <header class="module-header">
+        <div>
+            <p class="module-kicker">Finance</p>
+            <h1 class="module-title">Credit Notes</h1>
+        </div>
+        <div class="module-actions">
+            <div class="module-search">
+                <i class="ri-search-line"></i>
+                <input type="text" placeholder="Search credit notes, customers..." />
             </div>
-            <div class="flex items-center space-x-4">
-                <!-- Add Credit Note Button -->
-                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-medium transition-colors duration-200 flex items-center">
-                    <i class="ri-add-line mr-2"></i>
-                    New Credit Note
-                </button>
-            </div>
+            <button class="module-action">
+                <i class="ri-add-line"></i>
+                Add
+            </button>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="p-8">
-        <!-- Credit Notes Table -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-900">All Credit Notes</h3>
-            </div>
-            <div class="p-6">
-                <p class="text-gray-500">Credit note management interface will be implemented here.</p>
-            </div>
-        </div>
+    <nav class="module-subnav">
+        <a routerLink="/credit-notes" class="is-active">All Credit Notes</a>
+        <a routerLink="/credit-notes">New Credit Note</a>
+        <a routerLink="/credit-notes">Drafts</a>
+        <a routerLink="/credit-notes">Approved</a>
+        <a routerLink="/credit-notes">Adjustments</a>
+    </nav>
+
+    <main class="p-5">
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <h3 class="text-lg font-semibold text-slate-900">Credit notes view</h3>
+    <p class="mt-2 text-sm text-slate-600">This screen now follows the same plain submenu layout.</p>
+</div>
     </main>
 </div>

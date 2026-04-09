@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Dashboard } from './features/dashboard/dashboard';
+import { AllApps } from './features/all-apps/all-apps';
 import { Login } from './features/auth/login/login';
 import { Customers } from './features/customers/customers';
 import { Items } from './features/items/items';
@@ -13,6 +14,7 @@ import { CreditNotes } from './features/credit-notes/credit-notes';
 export const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'login', component: Login, title: 'Login | Opsentra ERP'},
+    {path: 'apps', component: AllApps, title: 'Menu Setup | Opsentra ERP'},
     {path: 'home', component: Dashboard, title: 'Dashboard | Opsentra ERP'},
     {path: 'customers', component: Customers, title: 'Customers | Opsentra ERP'},
     {path: 'items', component: Items, title: 'Items | Opsentra ERP'},

@@ -1,35 +1,36 @@
-<!-- Sidebar -->
-<app-sidebar></app-sidebar>
+﻿<app-sidebar></app-sidebar>
 
-<!-- Main Content Area -->
-<div class="ml-64 min-h-screen bg-gray-50">
-    <!-- Top Header -->
-    <header class="bg-white border-b border-gray-200 px-8 py-4 shadow-sm">
-        <div class="flex items-center justify-between">
-            <div>
-                <h1 class="text-2xl font-semibold text-gray-900">Items</h1>
-                <p class="text-sm text-gray-600 mt-1">Manage your product catalog and inventory items.</p>
+<div class="module-shell ml-56">
+    <header class="module-header">
+        <div>
+            <p class="module-kicker">Items</p>
+            <h1 class="module-title">Inventory Items</h1>
+        </div>
+        <div class="module-actions">
+            <div class="module-search">
+                <i class="ri-search-line"></i>
+                <input type="text" placeholder="Search items, categories..." />
             </div>
-            <div class="flex items-center space-x-4">
-                <!-- Add Item Button -->
-                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-medium transition-colors duration-200 flex items-center">
-                    <i class="ri-add-line mr-2"></i>
-                    Add Item
-                </button>
-            </div>
+            <button class="module-action">
+                <i class="ri-add-line"></i>
+                Add
+            </button>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="p-8">
-        <!-- Items Table -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-900">All Items</h3>
-            </div>
-            <div class="p-6">
-                <p class="text-gray-500">Item management interface will be implemented here.</p>
-            </div>
-        </div>
+    <nav class="module-subnav">
+        <a routerLink="/items" class="is-active">All Items</a>
+        <a routerLink="/items">Add Item</a>
+        <a routerLink="/items">Categories</a>
+        <a routerLink="/items">Stock</a>
+        <a routerLink="/items">Variants</a>
+        <a routerLink="/items">Reports</a>
+    </nav>
+
+    <main class="p-5">
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <h3 class="text-lg font-semibold text-slate-900">Inventory view</h3>
+    <p class="mt-2 text-sm text-slate-600">This screen now follows the same plain submenu layout.</p>
+</div>
     </main>
 </div>

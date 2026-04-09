@@ -1,0 +1,40 @@
+<div class="menu-setup-shell">
+    <section class="menu-setup-panel">
+        <div class="menu-setup-hero">
+            <img src="assets/Opsentra.png" alt="Opsentra Logo" class="menu-setup-logo" />
+            <p class="menu-setup-kicker">Post-login setup</p>
+            <h1>Choose the modules you need</h1>
+            <p class="menu-setup-copy">
+                Pick the categories that should appear in your sidebar. You can change them later if your workflow changes.
+            </p>
+        </div>
+
+        <div class="menu-grid">
+                <label *ngFor="let group of groups" class="menu-card" [class.menu-card--active]="selected.has(group.key)">
+                    <div class="menu-card__icon" [ngClass]="group.accent">
+                        <i [class]="group.icon"></i>
+                    </div>
+                <div class="menu-card__body">
+                    <div class="menu-card__row">
+                        <h2>{{ group.title }}</h2>
+                        <input
+                            type="checkbox"
+                            [checked]="selected.has(group.key)"
+                            (change)="toggle(group.key)"
+                        />
+                    </div>
+                    <p>{{ group.description }}</p>
+                </div>
+            </label>
+        </div>
+
+        <div class="menu-actions">
+            <button type="button" class="menu-actions__secondary" (click)="selectAll()">
+                Select all
+            </button>
+            <button type="button" class="menu-actions__primary" (click)="saveSelection()">
+                Save and continue
+            </button>
+        </div>
+    </section>
+</div>

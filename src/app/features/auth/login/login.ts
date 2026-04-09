@@ -15,7 +15,7 @@ export class Login {
 
   login()
   {
-    this.route.navigate(['/home']);
+    this.route.navigate(['/apps']);
   }
 
 }
