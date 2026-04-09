@@ -1,8 +1,6 @@
 <div class="menu-setup-shell">
     <section class="menu-setup-panel">
         <div class="menu-setup-hero">
-            <img src="assets/Opsentra.png" alt="Opsentra Logo" class="menu-setup-logo" />
-            <p class="menu-setup-kicker">Post-login setup</p>
             <h1>Choose the modules you need</h1>
             <p class="menu-setup-copy">
                 Pick the categories that should appear in your sidebar. You can change them later if your workflow changes.
@@ -32,9 +30,46 @@
             <button type="button" class="menu-actions__secondary" (click)="selectAll()">
                 Select all
             </button>
+            <button type="button" class="menu-actions__ghost" (click)="openCustomizePopup()">
+                <i class="ri-tools-line"></i>
+                <span>Customize App</span>
+            </button>
             <button type="button" class="menu-actions__primary" (click)="saveSelection()">
                 Save and continue
             </button>
         </div>
+
+        <p class="menu-setup-footer">Powered by Opsentra</p>
     </section>
+
+    <div class="menu-modal-backdrop" *ngIf="showCustomizePopup" (click)="closeCustomizePopup()">
+        <div class="menu-modal" (click)="$event.stopPropagation()">
+            <button type="button" class="menu-modal__close" aria-label="Close popup" (click)="closeCustomizePopup()">
+                <i class="ri-close-line"></i>
+            </button>
+
+            <p class="menu-modal__kicker">Contact us</p>
+            <h2>Need a custom app layout?</h2>
+            <p class="menu-modal__copy">
+                If you want us to tailor the ERP menus, workflows, or module structure for your team,
+                contact us and we can help you customize it.
+            </p>
+
+            <div class="menu-modal__info">
+                <div>
+                    <span>Email</span>
+                    <strong>support@opsentra.com</strong>
+                </div>
+                <div>
+                    <span>Phone</span>
+                    <strong>+91 98765 43210</strong>
+                </div>
+            </div>
+
+            <div class="menu-modal__actions">
+                <a class="menu-modal__link" href="mailto:support@opsentra.com">Contact Us</a>
+                <button type="button" class="menu-modal__secondary" (click)="closeCustomizePopup()">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

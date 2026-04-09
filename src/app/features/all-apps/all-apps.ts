@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-type MenuGroupKey = 'sales' | 'finance' | 'operations' | 'core';
+type MenuGroupKey = 'sales' | 'finance' | 'operations' | 'core' | 'mail' | 'crm' | 'purchase' | 'inventory' | 'hr' | 'reports' | 'settings' | 'support';
 
 interface MenuGroup {
   key: MenuGroupKey;
@@ -38,7 +38,7 @@ export class AllApps {
     {
       key: 'finance',
       title: 'Finance',
-      description: 'Payments, recurring billing, and credit notes',
+      description: 'Accounting, expenses, payments, recurring billing, and credit notes',
       icon: 'ri-wallet-3-line',
       accent: 'app-card--emerald',
     },
@@ -49,9 +49,66 @@ export class AllApps {
       icon: 'ri-truck-line',
       accent: 'app-card--orange',
     },
+    {
+      key: 'mail',
+      title: 'Mail',
+      description: 'Inbox, sent mail, drafts, and templates',
+      icon: 'ri-mail-line',
+      accent: 'app-card--violet',
+    },
+    {
+      key: 'crm',
+      title: 'CRM',
+      description: 'Leads, opportunities, and customer follow-up',
+      icon: 'ri-bubble-chart-line',
+      accent: 'app-card--teal',
+    },
+    {
+      key: 'purchase',
+      title: 'Purchase',
+      description: 'Supplier orders, requests, and vendor bills',
+      icon: 'ri-store-3-line',
+      accent: 'app-card--rose',
+    },
+    {
+      key: 'inventory',
+      title: 'Inventory',
+      description: 'Stock, transfers, warehouses, and availability',
+      icon: 'ri-archive-line',
+      accent: 'app-card--slate',
+    },
+    {
+      key: 'hr',
+      title: 'HR',
+      description: 'Employees, attendance, leave, and payroll',
+      icon: 'ri-team-line',
+      accent: 'app-card--blue',
+    },
+    {
+      key: 'support',
+      title: 'Support',
+      description: 'Tickets, helpdesk, chat, and customer support',
+      icon: 'ri-customer-service-2-line',
+      accent: 'app-card--violet',
+    },
+    {
+      key: 'reports',
+      title: 'Reports',
+      description: 'Sales, finance, and operations reporting',
+      icon: 'ri-bar-chart-2-line',
+      accent: 'app-card--emerald',
+    },
+    {
+      key: 'settings',
+      title: 'Settings',
+      description: 'Company, users, roles, and preferences',
+      icon: 'ri-settings-3-line',
+      accent: 'app-card--orange',
+    },
   ];
 
   selected = new Set<MenuGroupKey>();
+  showCustomizePopup = false;
 
   constructor(private readonly router: Router) {
     this.loadSelection();
@@ -73,6 +130,14 @@ export class AllApps {
   saveSelection(): void {
     localStorage.setItem('opsentra-selected-menu-groups', JSON.stringify([...this.selected]));
     this.router.navigate(['/home']);
+  }
+
+  openCustomizePopup(): void {
+    this.showCustomizePopup = true;
+  }
+
+  closeCustomizePopup(): void {
+    this.showCustomizePopup = false;
   }
 
   private loadSelection(): void {

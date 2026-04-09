@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { Sidebar } from "../../shared/sidebar/sidebar";
+import { RouterOutlet } from '@angular/router';
+import { Sidebar } from '../../shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-main-layouts',
   standalone: true,
-  imports: [Sidebar],
+  imports: [Sidebar, RouterOutlet],
   templateUrl: './main-layouts.html',
   styleUrl: './main-layouts.css',
 })
-export class MainLayouts {
-
-}
+export class MainLayouts {}

@@ -4,7 +4,9 @@
     inset: 0 auto 0 0;
     width: 14rem;
     height: 100vh;
-    overflow-y: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
     border-right: 1px solid #e5e7eb;
     box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
@@ -70,7 +72,29 @@
     color: #94a3b8;
 }
 
+.sidebar__search-clear {
+    display: grid;
+    place-items: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #94a3b8;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.sidebar__search-clear:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
 .sidebar__nav {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
     padding: 0.3rem 0.6rem 1rem;
 }
 
@@ -139,12 +163,23 @@
     background: #eef2ff;
 }
 
+.sidebar__empty {
+    margin: 0.8rem 0.45rem 0;
+    font-size: 0.82rem;
+    color: #94a3b8;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         position: static;
         width: 100%;
         height: auto;
+        overflow: visible;
         border-right: 0;
         border-bottom: 1px solid #e5e7eb;
+    }
+
+    .sidebar__nav {
+        overflow: visible;
     }
 }

@@ -1,11 +1,10 @@
 ﻿import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Sidebar } from '../../shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [Sidebar, RouterLink],
+  imports: [RouterLink],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

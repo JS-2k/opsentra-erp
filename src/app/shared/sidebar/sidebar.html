@@ -9,6 +9,25 @@
         </div>
     </div>
 
+    <div class="sidebar__search">
+        <i class="ri-search-line"></i>
+        <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            placeholder="Search menu"
+            aria-label="Search menu"
+        />
+        <button
+            *ngIf="searchQuery"
+            type="button"
+            class="sidebar__search-clear"
+            aria-label="Clear search"
+            (click)="clearSearch()"
+        >
+            <i class="ri-close-line"></i>
+        </button>
+    </div>
+
     <nav class="sidebar__nav">
         <a routerLink="/apps" routerLinkActive="active" class="nav-item nav-item--setup">
             <i class="ri-apps-2-add-line"></i>
@@ -32,5 +51,9 @@
                 <span>{{ link.label }}</span>
             </a>
         </div>
+
+        <p class="sidebar__empty" *ngIf="!hasVisibleResults && searchQuery.trim()">
+            No matching menus found.
+        </p>
     </nav>
 </aside>

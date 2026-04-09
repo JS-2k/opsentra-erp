@@ -70,10 +70,9 @@ html::-webkit-scrollbar-thumb:hover {
 
 .module-actions {
     display: flex;
-    flex-direction: column;
     align-items: flex-end;
-    gap: 0.35rem;
-    flex-wrap: nowrap;
+    gap: 0;
+    flex-wrap: wrap;
 }
 
 .module-search {
@@ -105,20 +104,6 @@ html::-webkit-scrollbar-thumb:hover {
     color: #94a3b8;
 }
 
-.module-action {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    border: 0;
-    background: transparent;
-    color: #2563eb;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 0.1rem 0;
-    align-self: flex-end;
-}
-
 .module-subnav {
     position: sticky;
     top: 4.15rem;
@@ -132,7 +117,8 @@ html::-webkit-scrollbar-thumb:hover {
     white-space: nowrap;
 }
 
-.module-subnav a {
+.module-subnav a,
+.module-subnav span {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -161,6 +147,10 @@ html::-webkit-scrollbar-thumb:hover {
     background: #2563eb;
 }
 
+.module-subnav span {
+    cursor: default;
+}
+
 @media (max-width: 768px) {
     .module-header {
         align-items: flex-start;
@@ -174,10 +164,6 @@ html::-webkit-scrollbar-thumb:hover {
     .module-actions {
         width: 100%;
         align-items: stretch;
-    }
-
-    .module-action {
-        align-self: flex-start;
     }
 
     .module-subnav {
