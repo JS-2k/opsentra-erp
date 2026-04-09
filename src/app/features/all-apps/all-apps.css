@@ -83,18 +83,23 @@
     display: grid;
     place-items: center;
     border-radius: 0.75rem;
-    color: #fff;
+    color: #334155;
     flex-shrink: 0;
     font-size: 1rem;
 }
 
-.app-card--slate { background: linear-gradient(135deg, #475569, #334155); }
-.app-card--blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-.app-card--emerald { background: linear-gradient(135deg, #10b981, #059669); }
-.app-card--orange { background: linear-gradient(135deg, #f59e0b, #ea580c); }
-.app-card--violet { background: linear-gradient(135deg, #7c3aed, #5b21b6); }
-.app-card--teal { background: linear-gradient(135deg, #0f766e, #115e59); }
-.app-card--rose { background: linear-gradient(135deg, #e11d48, #be123c); }
+.app-card--slate { background: #eef2f7; color: #475569; }
+.app-card--stone { background: #eef0f3; color: #334155; }
+.app-card--indigo { background: #edf0ff; color: #4f46e5; }
+.app-card--emerald { background: #e5f8f1; color: #059669; }
+.app-card--amber { background: #fff4df; color: #d97706; }
+.app-card--violet { background: #f2eefe; color: #7c3aed; }
+.app-card--cyan { background: #e6f8fb; color: #0891b2; }
+.app-card--pink { background: #ffe9f2; color: #db2777; }
+.app-card--blue { background: #e8f1ff; color: #2563eb; }
+.app-card--purple { background: #f1e9ff; color: #9333ea; }
+.app-card--green { background: #e7f7e9; color: #16a34a; }
+.app-card--orange { background: #fff1e6; color: #ea580c; }
 
 .menu-card__body {
     flex: 1;
