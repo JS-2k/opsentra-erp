@@ -1,5 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
@@ -21,7 +21,10 @@ export class Customers {
 
   customers: Customer[] = CUSTOMER_DATA;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+  ) {
     this.customerForm = createCustomerForm(this.fb);
   }
 
@@ -68,6 +71,10 @@ export class Customers {
 
   nextPage() {
     this.goToPage(this.currentPage + 1);
+  }
+
+  openCustomer(customerId: string) {
+    this.router.navigate(['/customers', customerId, 'edit']);
   }
 
   onSubmit() {
