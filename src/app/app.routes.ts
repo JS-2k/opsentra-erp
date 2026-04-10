@@ -4,6 +4,7 @@ import { Dashboard } from './features/dashboard/dashboard';
 import { AllApps } from './features/all-apps/all-apps';
 import { Login } from './features/auth/login/login';
 import { Customers } from './features/customers/customers';
+import { EditCustomerComponent } from './features/customers/edit-customer/edit-customer.component';
 import { Items } from './features/items/items';
 import { Quotes } from './features/quotes/quotes';
 import { DeliveryChallans } from './features/delivery-challans/delivery-challans';
@@ -24,6 +25,7 @@ export const routes: Routes = [
         children: [
             {path: 'home', component: Dashboard, title: 'Dashboard | Opsentra ERP'},
             {path: 'customers', component: Customers, title: 'Customers | Opsentra ERP'},
+            {path: 'customers/:id/edit', component: EditCustomerComponent, title: 'Edit Customer | Opsentra ERP'},
             {path: 'items', component: Items, title: 'Items | Opsentra ERP'},
             {path: 'quotes', component: Quotes, title: 'Quotes | Opsentra ERP'},
             {path: 'delivery-challans', component: DeliveryChallans, title: 'Delivery Challans | Opsentra ERP'},

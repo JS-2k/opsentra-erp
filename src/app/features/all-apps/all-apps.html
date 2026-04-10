@@ -1,43 +1,63 @@
 <div class="menu-setup-shell">
     <section class="menu-setup-panel">
-        <div class="menu-setup-hero">
-            <h1>Choose the modules you need</h1>
-            <p class="menu-setup-copy">
-                Pick the categories that should appear in your sidebar. You can change them later if your workflow changes.
-            </p>
-        </div>
+        <header class="menu-setup-header">
+            <div class="menu-setup-header__copy">
+                <h1>Configure your ERP workspace</h1>
+            </div>
 
-        <div class="menu-grid">
-                <label *ngFor="let group of groups" class="menu-card" [class.menu-card--active]="selected.has(group.key)">
-                    <div class="menu-card__icon" [ngClass]="group.accent">
-                        <i [class]="group.icon"></i>
-                    </div>
+            <div class="menu-setup-header__aside">
+                <button type="button" class="menu-tool" (click)="openCustomizePopup()">
+                    <i class="ri-tools-line"></i>
+                    <span>Customize app</span>
+                </button>
+            </div>
+        </header>
+
+
+
+        <section class="menu-grid" aria-label="Module selection">
+            <label
+                *ngFor="let group of groups"
+                class="menu-card"
+                [class.menu-card--active]="selected.has(group.key)"
+                [ngClass]="group.accent"
+            >
+                <div class="menu-card__icon" [ngClass]="group.accent" aria-hidden="true">
+                    <i [class]="group.icon"></i>
+                </div>
+
                 <div class="menu-card__body">
                     <div class="menu-card__row">
-                        <h2>{{ group.title }}</h2>
-                        <input
-                            type="checkbox"
-                            [checked]="selected.has(group.key)"
-                            (change)="toggle(group.key)"
-                        />
+                        <div class="menu-card__text">
+                            <h2>{{ group.title }}</h2>
+                            <p>{{ group.description }}</p>
+                        </div>
+                        <span class="menu-card__check" [class.menu-card__check--on]="selected.has(group.key)">
+                            <i class="ri-check-line"></i>
+                        </span>
                     </div>
-                    <p>{{ group.description }}</p>
                 </div>
-            </label>
-        </div>
 
-        <div class="menu-actions">
+                <input
+                    class="menu-card__input"
+                    type="checkbox"
+                    [checked]="selected.has(group.key)"
+                    (change)="toggle(group.key)"
+                    aria-label="Select {{ group.title }}"
+                />
+            </label>
+        </section>
+
+        <footer class="menu-actions">
             <button type="button" class="menu-actions__secondary" (click)="selectAll()">
                 Select all
             </button>
-            <button type="button" class="menu-actions__ghost" (click)="openCustomizePopup()">
-                <i class="ri-tools-line"></i>
-                <span>Customize App</span>
-            </button>
+
             <button type="button" class="menu-actions__primary" (click)="saveSelection()">
-                Save and continue
+                <span>Save and continue</span>
+                <i class="ri-arrow-right-line"></i>
             </button>
-        </div>
+        </footer>
 
         <p class="menu-setup-footer">Powered by Opsentra</p>
     </section>
@@ -67,7 +87,7 @@
             </div>
 
             <div class="menu-modal__actions">
-                <a class="menu-modal__link" href="mailto:support@opsentra.com">Contact Us</a>
+                <a class="menu-modal__link" href="mailto:support@opsentra.com">Contact us</a>
                 <button type="button" class="menu-modal__secondary" (click)="closeCustomizePopup()">Close</button>
             </div>
         </div>

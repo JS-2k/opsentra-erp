@@ -1,0 +1,48 @@
+<div class="module-shell ml-56 min-w-0">
+    <header class="module-header">
+        <div>
+            <p class="module-kicker">Customers</p>
+            <h1 class="module-title">Edit Customer</h1>
+        </div>
+        <div class="module-actions">
+            <div class="module-search">
+                <i class="ri-search-line"></i>
+                <input type="text" placeholder="Search customers, contacts, statements..." />
+            </div>
+        </div>
+    </header>
+
+    <nav class="module-subnav">
+        <a routerLink="/customers">All Customers</a>
+        <a routerLink="/customers">Add Customer</a>
+        <a href="#" (click)="$event.preventDefault()" class="cursor-pointer">Statements</a>
+        <a href="#" (click)="$event.preventDefault()" class="cursor-pointer">Follow-ups</a>
+        <a routerLink="/quotes">Related Quotes</a>
+        <a routerLink="/invoices">Related Invoices</a>
+        <a routerLink="/payments-received">Related Payments</a>
+    </nav>
+
+    <main class="min-w-0">
+        <div *ngIf="customer; else notFound">
+            <app-customer-form
+                [form]="customerForm"
+                title="Edit Customer"
+                heading="Update customer details"
+                description="Make changes to the existing customer profile and save the updates."
+                submitLabel="Update Customer"
+                (cancel)="goBack()"
+                (submit)="onSubmit()"
+            ></app-customer-form>
+        </div>
+
+        <ng-template #notFound>
+            <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <h2 class="text-lg font-semibold text-slate-900">Customer not found</h2>
+                <p class="mt-2 text-sm text-slate-600">We could not find a customer record for this ID.</p>
+                <button (click)="goBack()" class="mt-4 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700">
+                    Back to Customers
+                </button>
+            </div>
+        </ng-template>
+    </main>
+</div>

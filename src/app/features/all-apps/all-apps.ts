@@ -109,6 +109,7 @@ export class AllApps {
 
   selected = new Set<MenuGroupKey>();
   showCustomizePopup = false;
+  readonly recommendedModules = ['Sales', 'CRM', 'Finance'];
 
   constructor(private readonly router: Router) {
     this.loadSelection();
@@ -125,6 +126,18 @@ export class AllApps {
 
   selectAll(): void {
     this.selected = new Set(this.groups.map((group) => group.key));
+  }
+
+  get selectedCount(): number {
+    return this.selected.size;
+  }
+
+  get totalCount(): number {
+    return this.groups.length;
+  }
+
+  get progressPercent(): number {
+    return Math.round((this.selectedCount / this.totalCount) * 100);
   }
 
   saveSelection(): void {
