@@ -1,5 +1,5 @@
-
-<div class="module-shell ml-56">
+﻿
+<div class="module-shell ml-56 min-w-0">
     <header class="module-header">
         <div>
             <p class="module-kicker">Sales</p>
@@ -14,19 +14,182 @@
     </header>
 
     <nav class="module-subnav">
-        <a routerLink="/invoices" class="is-active">All Invoices</a>
-        <a routerLink="/invoices">New Invoice</a>
-        <a routerLink="/invoices">Drafts</a>
-        <a routerLink="/invoices">Sent</a>
-        <a routerLink="/invoices">Paid</a>
-        <a routerLink="/invoices">Overdue</a>
+        <a href="#" (click)="showCreateForm = false; $event.preventDefault()" class="cursor-pointer" [class.is-active]="!showCreateForm">All Invoices</a>
+        <a href="#" (click)="showCreateForm = true; $event.preventDefault()" class="cursor-pointer" [class.is-active]="showCreateForm">New Invoice</a>
+        <a href="#" (click)="$event.preventDefault()" class="cursor-pointer">Drafts</a>
+        <a href="#" (click)="$event.preventDefault()" class="cursor-pointer">Sent</a>
+        <a href="#" (click)="$event.preventDefault()" class="cursor-pointer">Paid</a>
+        <a href="#" (click)="$event.preventDefault()" class="cursor-pointer">Overdue</a>
     </nav>
 
-    <main class="p-5">
-        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-    <h3 class="text-lg font-semibold text-slate-900">Invoices view</h3>
-    <p class="mt-2 text-sm text-slate-600">This screen now follows the same plain submenu layout.</p>
-</div>
+    <main class="min-w-0">
+        <app-invoice-form
+            *ngIf="showCreateForm"
+            [form]="invoiceForm"
+            (cancel)="showCreateForm = false"
+            (submit)="onSubmit()"
+        ></app-invoice-form>
+
+        <section *ngIf="!showCreateForm" class="grid gap-4">
+            <div class="w-full min-w-0  border border-slate-200 bg-white p-5 shadow-sm">
+                <div class="flex items-start justify-between gap-3">
+                    <div>
+                        <h2 class="text-lg font-semibold text-slate-900">Invoice Management</h2>
+                        <p class="text-sm text-slate-500">Manage invoices, drafts, payments, and follow-up actions.</p>
+                    </div>
+                </div>
+
+                <div *ngIf="selectedCount > 0" class="mt-4 flex flex-col gap-3 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+                    <p class="text-sm font-medium text-blue-900">{{ selectedCount }} selected</p>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button
+                            type="button"
+                            (click)="bulkUpdateStatus('Sent')"
+                            class="rounded-lg border border-blue-200 bg-white px-3 py-1.5 text-xs font-semibold text-blue-700 hover:bg-blue-50"
+                        >
+                            Mark Sent
+                        </button>
+                        <button
+                            type="button"
+                            (click)="bulkUpdateStatus('Paid')"
+                            class="rounded-lg border border-emerald-200 bg-white px-3 py-1.5 text-xs font-semibold text-emerald-700 hover:bg-emerald-50"
+                        >
+                            Mark Paid
+                        </button>
+                        <button
+                            type="button"
+                            (click)="bulkDeleteSelected()"
+                            class="rounded-lg border border-red-200 bg-white px-3 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50"
+                        >
+                            Delete
+                        </button>
+                        <button
+                            type="button"
+                            (click)="clearSelection()"
+                            class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                        >
+                            Clear
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-4 grid gap-4 md:grid-cols-3">
+                    <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                        <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Total Invoices</p>
+                        <p class="mt-2 text-2xl font-bold text-slate-900">{{ invoices.length }}</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                        <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Paid</p>
+                        <p class="mt-2 text-2xl font-bold text-slate-900">{{ invoices.filter(invoice => invoice.status === 'Paid').length }}</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                        <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Outstanding Value</p>
+                        <p class="mt-2 text-2xl font-bold text-slate-900">
+                            {{ formatCurrency(invoices.filter(invoice => invoice.status !== 'Paid').reduce((sum, invoice) => sum + invoice.amount + invoice.tax - invoice.discount, 0)) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full min-w-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                <div class="border-b border-slate-200 bg-slate-50 px-4 py-3">
+                    <div class="flex items-center justify-between gap-3">
+                        <h3 class="text-sm font-semibold text-slate-700">All Invoices</h3>
+                        <span class="text-xs text-slate-500">{{ invoices.length }} invoices</span>
+                    </div>
+                </div>
+
+                <div class="w-full max-w-full overflow-x-auto">
+                    <table class="w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="w-12 px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">
+                                    <input
+                                        type="checkbox"
+                                        [checked]="allVisibleSelected"
+                                        (change)="toggleVisibleSelection($any($event.target).checked)"
+                                        class="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                                    />
+                                </th>
+                                <th class="hidden md:table-cell px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">Invoice No</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">Customer</th>
+                                <th class="hidden lg:table-cell px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">Issue Date</th>
+                                <th class="hidden lg:table-cell px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">Due Date</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">Total</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 bg-white">
+                            <tr
+                                *ngFor="let invoice of paginatedInvoices"
+                                (click)="openInvoice(invoice.id)"
+                                (keydown.enter)="openInvoice(invoice.id)"
+                                tabindex="0"
+                                role="button"
+                                class="cursor-pointer hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                            >
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <input
+                                        type="checkbox"
+                                        [checked]="isSelected(invoice.id)"
+                                        (click)="$event.stopPropagation()"
+                                        (change)="toggleSelection(invoice.id, $any($event.target).checked)"
+                                        class="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                                    />
+                                </td>
+                                <td class="hidden md:table-cell px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">{{ invoice.invoiceNo }}</td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="max-w-[14rem] truncate text-sm font-medium text-slate-900">{{ invoice.customerName }}</div>
+                                </td>
+                                <td class="hidden lg:table-cell px-4 py-3 whitespace-nowrap text-sm text-slate-600">{{ invoice.issueDate }}</td>
+                                <td class="hidden lg:table-cell px-4 py-3 whitespace-nowrap text-sm text-slate-600">{{ invoice.dueDate }}</td>
+                                <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">{{ formatTotal(invoice) }}</td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <span class="inline-flex rounded-full px-2 py-1 text-xs font-medium" [ngClass]="getStatusClass(invoice.status)">
+                                        {{ invoice.status }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex flex-col gap-3 border-t border-slate-200 bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+                    <p class="text-sm text-slate-500">
+                        Showing {{ paginationStart }} to {{ paginationEnd }} of {{ invoices.length }} invoices
+                    </p>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button
+                            type="button"
+                            (click)="previousPage()"
+                            [disabled]="currentPage === 1"
+                            class="inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                            Previous
+                        </button>
+
+                        <button
+                            *ngFor="let page of pageNumbers"
+                            type="button"
+                            (click)="goToPage(page)"
+                            [ngClass]="page === currentPage
+                                ? 'inline-flex items-center rounded-md border border-blue-600 bg-blue-600 px-3 py-2 text-sm font-medium text-white'
+                                : 'inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50'"
+                        >
+                            {{ page }}
+                        </button>
+
+                        <button
+                            type="button"
+                            (click)="nextPage()"
+                            [disabled]="currentPage === totalPages"
+                            class="inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 </div>
-

@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+﻿import { Routes } from '@angular/router';
 import { MainLayouts } from './layouts/main-layouts/main-layouts';
 import { Dashboard } from './features/dashboard/dashboard';
 import { AllApps } from './features/all-apps/all-apps';
@@ -9,6 +9,7 @@ import { Items } from './features/items/items';
 import { Quotes } from './features/quotes/quotes';
 import { DeliveryChallans } from './features/delivery-challans/delivery-challans';
 import { Invoices } from './features/invoices/invoices';
+import { EditInvoiceComponent } from './features/invoices/edit-invoice/edit-invoice.component';
 import { PaymentsReceived } from './features/payments-received/payments-received';
 import { RecurringInvoices } from './features/recurring-invoices/recurring-invoices';
 import { CreditNotes } from './features/credit-notes/credit-notes';
@@ -30,6 +31,7 @@ export const routes: Routes = [
             {path: 'quotes', component: Quotes, title: 'Quotes | Opsentra ERP'},
             {path: 'delivery-challans', component: DeliveryChallans, title: 'Delivery Challans | Opsentra ERP'},
             {path: 'invoices', component: Invoices, title: 'Invoices | Opsentra ERP'},
+            {path: 'invoices/:id/edit', component: EditInvoiceComponent, title: 'Edit Invoice | Opsentra ERP'},
             {path: 'payments-received', component: PaymentsReceived, title: 'Payments Received | Opsentra ERP'},
             {path: 'recurring-invoices', component: RecurringInvoices, title: 'Recurring Invoices | Opsentra ERP'},
             {path: 'credit-notes', component: CreditNotes, title: 'Credit Notes | Opsentra ERP'},

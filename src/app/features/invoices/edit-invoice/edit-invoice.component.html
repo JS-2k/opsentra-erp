@@ -1,0 +1,47 @@
+﻿<div class="module-shell ml-56 min-w-0">
+    <header class="module-header">
+        <div>
+            <p class="module-kicker">Sales</p>
+            <h1 class="module-title">Edit Invoice</h1>
+        </div>
+        <div class="module-actions">
+            <div class="module-search">
+                <i class="ri-search-line"></i>
+                <input type="text" placeholder="Search invoices, customers..." />
+            </div>
+        </div>
+    </header>
+
+    <nav class="module-subnav">
+        <a routerLink="/invoices">All Invoices</a>
+        <a routerLink="/invoices">New Invoice</a>
+        <a href="#" (click)="$event.preventDefault()" class="cursor-pointer">Drafts</a>
+        <a href="#" (click)="$event.preventDefault()" class="cursor-pointer">Sent</a>
+        <a href="#" (click)="$event.preventDefault()" class="cursor-pointer">Paid</a>
+        <a href="#" (click)="$event.preventDefault()" class="cursor-pointer">Overdue</a>
+    </nav>
+
+    <main class="min-w-0">
+        <div *ngIf="invoice; else notFound">
+            <app-invoice-form
+                [form]="invoiceForm"
+                title="Edit Invoice"
+                heading="Update invoice details"
+                description="Adjust the invoice values and keep the workflow compact."
+                submitLabel="Update Invoice"
+                (cancel)="goBack()"
+                (submit)="onSubmit()"
+            ></app-invoice-form>
+        </div>
+
+        <ng-template #notFound>
+            <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <h2 class="text-lg font-semibold text-slate-900">Invoice not found</h2>
+                <p class="mt-2 text-sm text-slate-600">We could not find an invoice record for this ID.</p>
+                <button (click)="goBack()" class="mt-4 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700">
+                    Back to Invoices
+                </button>
+            </div>
+        </ng-template>
+    </main>
+</div>
